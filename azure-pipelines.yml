@@ -21,9 +21,10 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
-        tags: |
-          $(tag)
+        containerRegistry: 'poc-container-registry'
+        repository: 'javascript-demo'
+        tags: $(Build.BuildId)
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        
